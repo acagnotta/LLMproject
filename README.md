@@ -36,12 +36,6 @@ ollama pull llama3.2:3b
 
 **Chat commands:** `/temp <value>` change temperature · `/history` show messages/tokens sent · `/reset` clear memory · `/bye` quit
 
-## What I learned so far
-- **LLMs are stateless.** Chat "memory" is just the client re-sending the full message history at every turn, so the prompt grows (and gets more expensive) as the conversation goes on.
-- **System prompts** steer tone and behavior: the same question with a different system prompt produced a 3× longer, completely different answer.
-- **Temperature** rescales the token probabilities (softmax of logits / T). With T=0 the model always picked the same answer; with T=1.5 every run was different. Factual tasks such as RAG should use low temperature.
-- **Small models hallucinate** confidently — which is exactly the problem RAG addresses by grounding answers in retrieved documents.
-
 ## Project structure
 ```
 src/
