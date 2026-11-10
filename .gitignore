@@ -1,0 +1,16 @@
+# Segreti
+.env
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Dati e database locali (possono essere grandi o privati)
+data/raw/*
+!data/raw/.gitkeep
+chroma_db/
+
+# Sistema / editor
+.DS_Store
+.vscode/
