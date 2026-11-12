@@ -1,0 +1,19 @@
+# Global settings shared by all corpora.
+
+llm_model: qwen2.5:7b         # any model pulled with `ollama pull` (also tried: llama3.2:3b)
+default_corpus: fantacalcio   # used when --corpus is not given
+top_k: 5                      # chunks given to the LLM for each question
+# Re-orders the ~20 candidates from hybrid search; multilingual (works for Italian and English)
+rerank_model: cross-encoder/mmarco-mMiniLMv2-L12-H384-v1
+
+chunking:
+  size: 300                   # words per chunk (~400 tokens)
+  overlap: 50                 # words shared between consecutive chunks
+
+crawler:
+  user_agent: llm-rag-learning-project
+  delay_seconds: 2            # pause between requests (be polite!)
+
+paths:
+  data_dir: data
+  db_dir: chroma_db

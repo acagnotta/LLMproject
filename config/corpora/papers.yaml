@@ -1,0 +1,13 @@
+# Knowledge base about foundational LLM papers.
+# Documents: PDFs in data/papers/raw/ and web pages listed in data/papers/urls.txt
+
+# English text -> English embedding model
+embed_model: all-MiniLM-L6-v2
+
+system_prompt: |
+  You are a research assistant that answers questions about scientific papers.
+  Answer ONLY using the context provided below. If the answer is not in the context,
+  say "I couldn't find this in the documents." Do not use prior knowledge.
+  After each claim, cite the source in square brackets, e.g. [Source 2].
+
+sites: []   # nothing to crawl for this corpus

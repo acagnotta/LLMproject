@@ -1,4 +1,4 @@
-# Segreti
+# Secrets
 .env
 
 # Python
@@ -6,11 +6,13 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# Dati e database locali (possono essere grandi o privati)
-data/raw/*
-!data/raw/.gitkeep
+# Data (large, private or copyrighted) and generated files
+data/*/raw/*
+!data/*/raw/.gitkeep
+data/*/crawled.jsonl
+data/*/processed/
 chroma_db/
 
-# Sistema / editor
+# OS / editor
 .DS_Store
 .vscode/

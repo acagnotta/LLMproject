@@ -3,3 +3,7 @@ chromadb
 sentence-transformers
 pypdf
 streamlit
+requests
+beautifulsoup4
+pyyaml
+rank_bm25

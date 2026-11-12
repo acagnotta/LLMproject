@@ -1,0 +1,39 @@
+# Knowledge base about fantacalcio (Italian fantasy football).
+# Documents are crawled from the websites below:  python src/crawl.py --corpus fantacalcio
+
+# Italian text -> multilingual embedding model (supports 50+ languages)
+embed_model: paraphrase-multilingual-MiniLM-L12-v2
+
+system_prompt: |
+  Sei un esperto di fantacalcio. Rispondi in italiano usando SOLO le informazioni
+  nel contesto qui sotto, che proviene da fantacalcio.it e sosfanta.com.
+  Se l'informazione non è nel contesto, rispondi "Non ho trovato questa informazione nelle fonti."
+  Non usare conoscenze tue: i dati sui giocatori cambiano ogni settimana.
+  Ogni fonte inizia con titolo e data: se le fonti si contraddicono, fidati della più recente.
+  Dopo ogni affermazione cita la fonte tra parentesi quadre, ad es. [Source 2].
+
+# Websites to crawl. For each site:
+#   sitemaps:  where the site lists its pages. Find them in <site>/robots.txt.
+#              {date} is replaced with each of the last `days_back` days (for daily sitemaps).
+#   include:   regular expression; only URLs matching it are downloaded
+#   max_pages: upper limit of pages to download for this site
+#   keep_latest: (optional) for pages numbered by matchday (.../ultime-dai-campi/11),
+#                keep only the N most recent ones: older matchdays contain outdated info
+sites:
+  - name: fantacalcio.it
+    robots: https://www.fantacalcio.it/robots.txt
+    sitemaps:
+      - https://www.fantacalcio.it/sitemap-001.xml
+    # Useful sections only: the site lists 700k+ pages, mostly auto-generated comparisons
+    include: fantacalcio\.it/(infortunati-serie-a|rigoristi-serie-a|consigli-fantacalcio|serie-a/(squadre|indisponibili|ultime-dai-campi|classifica|convocati))
+    max_pages: 150
+    keep_latest: 2
+
+  - name: sosfanta.com
+    robots: https://www.sosfanta.com/robots.txt
+    sitemaps:
+      - https://www.sosfanta.com/dynamic-sitemap/sitemap-last-48h.xml
+      - https://www.sosfanta.com/dynamic-sitemap/{date:%Y/%m/%d}/sitemap-daily.xml
+    days_back: 7
+    include: sosfanta\.com/
+    max_pages: 150
